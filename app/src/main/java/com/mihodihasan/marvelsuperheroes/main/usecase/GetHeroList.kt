@@ -4,8 +4,9 @@ import com.mihodihasan.marvelsuperheroes.common.UseCase
 import com.mihodihasan.marvelsuperheroes.data.source.DataSource
 import com.mihodihasan.marvelsuperheroes.data.source.Repository
 import com.mihodihasan.marvelsuperheroes.main.model.Hero
+import javax.inject.Inject
 
-class GetHeroList(private val repository: Repository) :
+class GetHeroList @Inject constructor(private val repository: Repository) :
     UseCase<GetHeroList.RequestValues, GetHeroList.ResponseValue>() {
 
     override fun executeUseCase(requestValues: RequestValues) {

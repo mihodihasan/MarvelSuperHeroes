@@ -1,6 +1,8 @@
 package com.mihodihasan.marvelsuperheroes.common
 
-class UseCaseHandler(private val mUseCaseScheduler: UseCaseScheduler) {
+import javax.inject.Inject
+
+class UseCaseHandler @Inject constructor(private val mUseCaseScheduler: UseCaseScheduler) {
     companion object {
         private var INSTANCE : UseCaseHandler?=null
         get() {

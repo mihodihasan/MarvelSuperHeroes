@@ -19,5 +19,7 @@ interface MainContract {
     interface Presenter : BasePresenter {
         fun loadMarvelHeroes(pageNumber: Int)
         fun loadComics(heroId: String, pageNumber: Int)
+        fun initView(view:View?)
+        fun destroyView()
     }
 }
