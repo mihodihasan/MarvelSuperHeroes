@@ -1,7 +1,8 @@
 package com.mihodihasan.marvelsuperheroes.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mihodihasan.marvelsuperheroes.HeroApp
 import com.mihodihasan.marvelsuperheroes.R
 import com.mihodihasan.marvelsuperheroes.main.model.Hero
@@ -12,12 +13,32 @@ import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainContract.View {
-    @Inject lateinit var presenter: MainContract.Presenter
+    @Inject
+    lateinit var presenter: MainContract.Presenter
+    lateinit var adapter: CharacterAdapter
+    private lateinit var list: MutableList<Hero>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as HeroApp).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        list = mutableListOf()
+        adapter = CharacterAdapter(this, list)
+        top_list_recycler.adapter = adapter
+        top_list_recycler.layoutManager =
+            LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
+        top_list_recycler.isNestedScrollingEnabled = true
+        top_list_recycler.setHasFixedSize(true)
+
+        list.add(Hero("Lushan", ""))
+        list.add(Hero("Lushan", ""))
+        list.add(Hero("Lushan", ""))
+        list.add(Hero("Lushan", ""))
+        list.add(Hero("Lushan", ""))
+        list.add(Hero("Lushan", ""))
+        list.add(Hero("Lushan", ""))
+        adapter.notifyDataSetChanged()
     }
 
     override fun onResume() {

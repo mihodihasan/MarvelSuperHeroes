@@ -29,7 +29,7 @@ class UseCaseThreadPoolScheduler @Inject constructor(): UseCaseScheduler {
     }
 
     override fun execute(runnable: Runnable) {
-        mThreadPoolExecutor!!.execute(runnable)
+        mThreadPoolExecutor?.execute(runnable)
     }
 
     override fun <V : UseCase.ResponseValue> notifyResponse(
