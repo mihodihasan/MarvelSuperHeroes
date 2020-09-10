@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mihodihasan.marvelsuperheroes.R
 import com.mihodihasan.marvelsuperheroes.main.model.Hero
+import com.mihodihasan.marvelsuperheroes.main.model.HeroResult
 import kotlinx.android.synthetic.main.item_view_top_bar.view.*
 
-class CharacterAdapter(private val context: Context, private val charList: MutableList<Hero>) :
+class CharacterAdapter(private val context: Context, private val charList: MutableList<HeroResult>) :
     RecyclerView.Adapter<CharacterAdapter.CharacterVH>() {
 
     class CharacterVH(itemView: View) : RecyclerView.ViewHolder(itemView)

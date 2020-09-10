@@ -1,5 +1,6 @@
 package com.mihodihasan.marvelsuperheroes.network
 
+import com.mihodihasan.marvelsuperheroes.main.model.Hero
 import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -15,5 +16,5 @@ interface ApiInterface {
         @Query("hash") hash:String,
         @Query("ts") timeStamp:String,
         @Header("If-None-Match") eTag:String
-    ) : ResponseBody
+    ) : Hero
 }

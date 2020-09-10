@@ -2,10 +2,11 @@ package com.mihodihasan.marvelsuperheroes.data.source
 
 import com.mihodihasan.marvelsuperheroes.main.model.Comics
 import com.mihodihasan.marvelsuperheroes.main.model.Hero
+import com.mihodihasan.marvelsuperheroes.main.model.HeroResult
 
 interface DataSource {
     interface LoadHeroesCallback {
-        fun onHeroesLoaded(heroes: MutableList<Hero>)
+        fun onHeroesLoaded(heroes: MutableList<HeroResult>)
         fun onDataNotAvailable()
     }
 

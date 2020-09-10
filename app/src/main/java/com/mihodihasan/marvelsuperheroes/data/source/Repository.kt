@@ -7,7 +7,7 @@ import javax.inject.Inject
 class Repository @Inject constructor(private val localDataSource: LocalDataSource, private val remoteDataSource: RemoteDataSource) : DataSource {
     override suspend fun getHeroes(pageNo: Int, callback: DataSource.LoadHeroesCallback) {
         try {
-            when (val response = remoteDataSource.getHeroes()) {
+            when (val response = remoteDataSource.getHeroes(pageNo)) {
                 is ResultData.Success -> {
                     callback.onHeroesLoaded(response.data)
                 }

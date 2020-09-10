@@ -6,20 +6,38 @@ import com.mihodihasan.marvelsuperheroes.data.exception.RemoteDataNotFoundExcept
 import com.mihodihasan.marvelsuperheroes.di.IoDispatcher
 import com.mihodihasan.marvelsuperheroes.main.model.Comics
 import com.mihodihasan.marvelsuperheroes.main.model.Hero
+import com.mihodihasan.marvelsuperheroes.main.model.HeroResult
 import com.mihodihasan.marvelsuperheroes.network.ApiInterface
+import com.mihodihasan.marvelsuperheroes.utils.md5
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.plus
 import kotlinx.coroutines.withContext
+import java.util.*
 import javax.inject.Inject
 
-class RemoteDataSource @Inject constructor(val apiInterface: ApiInterface, @IoDispatcher private val ioDispatcher: CoroutineDispatcher) {
-    suspend fun getHeroes():ResultData<MutableList<Hero>>{
+class RemoteDataSource @Inject constructor(
+    val apiInterface: ApiInterface,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
+) {
+    suspend fun getHeroes(pageNo: Int): ResultData<MutableList<HeroResult>> {
         val result = withContext(ioDispatcher) {
             try {
-                val responseBody =
-                    apiInterface.getHeroes("name","25","0","9fd2b96ccdc0acf33d90224c98207a49","7370018f941e9085eef964f79587d688","1599721588","")
-                val jsonString = responseBody.string()
-                Log.d("LSN_TAG", "getHeroes: ".plus(jsonString))
-                ResultData.Success(mutableListOf<Hero>())
+                val offset: Int = pageNo * 25
+                val limit: Int = offset + 25
+                val timestamp : Long = Date().time
+                val decodedHash = "".plus(timestamp).plus("9299d0b0d2660100b5bb18451282d129ca9b2430").plus("9fd2b96ccdc0acf33d90224c98207a49")
+                val encodedHash = decodedHash.md5()
+                val heroResponse =
+                    apiInterface.getHeroes(
+                        "name",
+                        "".plus(limit),
+                        "".plus(offset),
+                        "9fd2b96ccdc0acf33d90224c98207a49",
+                        "".plus(encodedHash),
+                        "".plus(timestamp),
+                        ""
+                    )
+                ResultData.Success(heroResponse.mData.heroResults)
             } catch (exception: Exception) {
                 ResultData.Error(exception)
             }
@@ -35,7 +53,18 @@ class RemoteDataSource @Inject constructor(val apiInterface: ApiInterface, @IoDi
             }
         }
     }
-    fun getComics():MutableList<Comics>{
+
+    fun getComics(): MutableList<Comics> {
         return mutableListOf()
     }
+    /*
+    0   0-24
+    1   25-49
+    2   50-74
+    3   75-99
+
+
+    */
+
+
 }

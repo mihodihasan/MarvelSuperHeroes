@@ -1,6 +1,7 @@
 package com.mihodihasan.marvelsuperheroes.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mihodihasan.marvelsuperheroes.HeroApp
@@ -9,6 +10,7 @@ import com.mihodihasan.marvelsuperheroes.main.adapter.CharacterAdapter
 import com.mihodihasan.marvelsuperheroes.main.adapter.ContentAdapter
 import com.mihodihasan.marvelsuperheroes.main.model.Comics
 import com.mihodihasan.marvelsuperheroes.main.model.Hero
+import com.mihodihasan.marvelsuperheroes.main.model.HeroResult
 import com.mihodihasan.marvelsuperheroes.utils.hide
 import com.mihodihasan.marvelsuperheroes.utils.show
 import com.mihodihasan.marvelsuperheroes.utils.toast
@@ -19,7 +21,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     @Inject
     lateinit var presenter: MainContract.Presenter
     private lateinit var characterAdapter: CharacterAdapter
-    private lateinit var characterList: MutableList<Hero>
+    private lateinit var characterList: MutableList<HeroResult>
     lateinit var contentAdapter: ContentAdapter
     private lateinit var contentList: MutableList<Comics>
 
@@ -41,14 +43,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         content_recycler.adapter = contentAdapter
         content_recycler.layoutManager =
             LinearLayoutManager(this)
-        characterList.add(Hero("Lushan", ""))
-        characterList.add(Hero("Lushan", ""))
-        characterList.add(Hero("Lushan", ""))
-        characterList.add(Hero("Lushan", ""))
-        characterList.add(Hero("Lushan", ""))
-        characterList.add(Hero("Lushan", ""))
-        characterList.add(Hero("Lushan", ""))
-        characterAdapter.notifyDataSetChanged()
 
         contentList.add(Comics("A Quick Brown Fox Jumps Over The Lazy Dog!"))
         contentList.add(Comics("A Quick Brown Fox Jumps Over The Lazy Dog!"))
@@ -91,7 +85,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun hideMainContentViewLoading() {
     }
 
-    override fun displayHeroesAvatar(heroList: MutableList<Hero>) {
+    override fun displayHeroesAvatar(heroList: MutableList<HeroResult>) {
+        Log.d("RESULT_FROM_ACTIVITY", "displayHeroesAvatar: ".plus(heroList.toString()))
     }
 
     override fun displayComicsList(heroList: MutableList<Hero>) {

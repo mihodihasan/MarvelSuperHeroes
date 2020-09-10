@@ -4,6 +4,7 @@ import com.mihodihasan.marvelsuperheroes.common.UseCase
 import com.mihodihasan.marvelsuperheroes.data.source.DataSource
 import com.mihodihasan.marvelsuperheroes.data.source.Repository
 import com.mihodihasan.marvelsuperheroes.main.model.Hero
+import com.mihodihasan.marvelsuperheroes.main.model.HeroResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -20,7 +21,7 @@ class GetHeroList @Inject constructor(private val repository: Repository) :
         )
         coroutineScope.launch {
             repository.getHeroes(requestValues.getPageNumber(), object : DataSource.LoadHeroesCallback {
-                override fun onHeroesLoaded(heroes: MutableList<Hero>) {
+                override fun onHeroesLoaded(heroes: MutableList<HeroResult>) {
                     val responseValue = ResponseValue(heroes)
                     mUseCaseCallback.onSuccess(responseValue)
                 }
@@ -36,7 +37,7 @@ class GetHeroList @Inject constructor(private val repository: Repository) :
         fun getPageNumber(): Int = pageNo
     }
 
-    class ResponseValue(private val heroesList: MutableList<Hero>) : UseCase.ResponseValue {
-        fun getHeroesList(): MutableList<Hero> = heroesList
+    class ResponseValue(private val heroesList: MutableList<HeroResult>) : UseCase.ResponseValue {
+        fun getHeroesList(): MutableList<HeroResult> = heroesList
     }
 }

@@ -12,9 +12,7 @@ import javax.inject.Inject
 class MainPresenter constructor(private val mUseCaseHandler: UseCaseHandler, private val getHeroList: GetHeroList): MainContract.Presenter {
 
     var mMainView : MainContract.View? = null
-    init {
-//        mMainView.setPresenter(this)
-    }
+
     override fun loadMarvelHeroes(pageNumber: Int) {
             mMainView?.showMainContentViewLoading()
             val requestValues = GetHeroList.RequestValues(pageNumber)
