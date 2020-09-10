@@ -87,6 +87,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun displayHeroesAvatar(heroList: MutableList<HeroResult>) {
         Log.d("RESULT_FROM_ACTIVITY", "displayHeroesAvatar: ".plus(heroList.toString()))
+        characterList.addAll(heroList)
+        characterAdapter.notifyDataSetChanged()
     }
 
     override fun displayComicsList(heroList: MutableList<Hero>) {

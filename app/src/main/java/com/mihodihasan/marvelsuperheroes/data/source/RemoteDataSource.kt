@@ -5,6 +5,7 @@ import com.mihodihasan.marvelsuperheroes.common.ResultData
 import com.mihodihasan.marvelsuperheroes.data.exception.RemoteDataNotFoundException
 import com.mihodihasan.marvelsuperheroes.di.IoDispatcher
 import com.mihodihasan.marvelsuperheroes.main.model.Comics
+import com.mihodihasan.marvelsuperheroes.main.model.ComicsResult
 import com.mihodihasan.marvelsuperheroes.main.model.Hero
 import com.mihodihasan.marvelsuperheroes.main.model.HeroResult
 import com.mihodihasan.marvelsuperheroes.network.ApiInterface
@@ -16,7 +17,7 @@ import java.util.*
 import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(
-    val apiInterface: ApiInterface,
+    private val apiInterface: ApiInterface,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) {
     suspend fun getHeroes(pageNo: Int): ResultData<MutableList<HeroResult>> {
@@ -54,17 +55,40 @@ class RemoteDataSource @Inject constructor(
         }
     }
 
-    fun getComics(): MutableList<Comics> {
-        return mutableListOf()
+    suspend fun getComics(heroId:Int, pageNo: Int): ResultData<MutableList<ComicsResult>> {
+        val result = withContext(ioDispatcher) {
+            try {
+                val offset: Int = pageNo * 25
+                val limit: Int = offset + 25
+                val timestamp : Long = Date().time
+                val decodedHash = "".plus(timestamp).plus("9299d0b0d2660100b5bb18451282d129ca9b2430").plus("9fd2b96ccdc0acf33d90224c98207a49")
+                val encodedHash = decodedHash.md5()
+                val comicsResponse =
+                    apiInterface.getComics(
+                        "name",
+                        "".plus(limit),
+                        "".plus(offset),
+                        "9fd2b96ccdc0acf33d90224c98207a49",
+                        "".plus(encodedHash),
+                        "".plus(timestamp),
+                        "".plus(heroId),
+                        ""
+                    )
+                ResultData.Success(comicsResponse.data.results)
+            } catch (exception: Exception) {
+                ResultData.Error(exception)
+            }
+        }
+        return when (result) {
+            is ResultData.Success -> {
+                val response = result.data
+//                withContext(ioDispatcher) { appDao.setListCountries(response) }
+                ResultData.Success(response)
+            }
+            is ResultData.Error -> {
+                ResultData.Error(RemoteDataNotFoundException())
+            }
+        }
     }
-    /*
-    0   0-24
-    1   25-49
-    2   50-74
-    3   75-99
-
-
-    */
-
 
 }

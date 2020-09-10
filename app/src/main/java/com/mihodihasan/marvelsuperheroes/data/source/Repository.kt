@@ -20,7 +20,18 @@ class Repository @Inject constructor(private val localDataSource: LocalDataSourc
         }
     }
 
-    override fun getComics(heroId: String, pageNo: Int, callback: DataSource.LoadComicsCallback) {
-        callback.onComicsLoaded(localDataSource.getComics())
+    override suspend fun getComics(heroId: String, pageNo: Int, callback: DataSource.LoadComicsCallback) {
+        try {
+            when (val response = remoteDataSource.getHeroes(pageNo)) {
+                is ResultData.Success -> {
+                    callback.onComicsLoaded(response.data)
+                }
+                is ResultData.Error -> {
+                    callback.onDataNotAvailable()
+                }
+            }
+        } catch (exception:Exception){
+            callback.onDataNotAvailable()
+        }
     }
 }

@@ -1,7 +1,5 @@
 package com.mihodihasan.marvelsuperheroes.data.source
 
-import com.mihodihasan.marvelsuperheroes.main.model.Comics
-import com.mihodihasan.marvelsuperheroes.main.model.Hero
 import com.mihodihasan.marvelsuperheroes.main.model.HeroResult
 
 interface DataSource {
@@ -11,11 +9,11 @@ interface DataSource {
     }
 
     interface LoadComicsCallback {
-        fun onComicsLoaded(comics: MutableList<Comics>)
+        fun onComicsLoaded(comics: MutableList<HeroResult>)
         fun onDataNotAvailable()
     }
 
     suspend fun getHeroes(pageNo: Int, callback: LoadHeroesCallback)
 
-    fun getComics(heroId: String, pageNo: Int, callback: LoadComicsCallback)
+    suspend fun getComics(heroId: String, pageNo: Int, callback: LoadComicsCallback)
 }
