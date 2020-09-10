@@ -1,4 +1,4 @@
-package com.mihodihasan.marvelsuperheroes.main
+package com.mihodihasan.marvelsuperheroes.main.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -1,15 +1,12 @@
 package com.mihodihasan.marvelsuperheroes.common
 
+import android.util.Log
+import kotlinx.coroutines.*
+import java.lang.Runnable
 import javax.inject.Inject
 
 class UseCaseHandler @Inject constructor(private val mUseCaseScheduler: UseCaseScheduler) {
-    companion object {
-        private var INSTANCE : UseCaseHandler?=null
-        get() {
-            if (field ==null) INSTANCE = UseCaseHandler(UseCaseThreadPoolScheduler())
-            return field
-        }
-    }
+
 
     fun <T : UseCase.RequestValues, R : UseCase.ResponseValue> execute(
         useCase: UseCase<T, R>, values: T, callback: UseCase.UseCaseCallback<R>
@@ -21,15 +18,10 @@ class UseCaseHandler @Inject constructor(private val mUseCaseScheduler: UseCaseS
         // Espresso knows
         // that the app is busy until the response is handled.
 //        EspressoIdlingResource.increment() // App is busy until further notice
-        mUseCaseScheduler.execute(Runnable {
-            useCase.run()
-            // This callback may be called twice, once for the cache and once for loading
-            // the data from the server API, so we check before decrementing, otherwise
-            // it throws "Counter has been corrupted!" exception.
-            /*if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
-                EspressoIdlingResource.decrement() // Set app as idle.
-            }*/
-        })
+
+        mUseCaseScheduler.execute {
+                useCase.run()
+        }
     }
 
     fun <V : UseCase.ResponseValue> notifyResponse(

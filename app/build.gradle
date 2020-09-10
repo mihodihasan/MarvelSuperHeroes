@@ -49,8 +49,10 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     //retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    //Moshi support for the core Moshi JSON library, and for Moshi's Kotlin support
+    implementation "com.squareup.moshi:moshi:$version_moshi"
+    implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
     dependencies {
         implementation('com.github.ihsanbal:LoggingInterceptor:3.0.0') {
             exclude group: 'org.json', module: 'json'

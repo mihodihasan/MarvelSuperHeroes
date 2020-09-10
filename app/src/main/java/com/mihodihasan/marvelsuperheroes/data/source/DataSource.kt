@@ -14,7 +14,7 @@ interface DataSource {
         fun onDataNotAvailable()
     }
 
-    fun getHeroes(pageNo: Int, callback: LoadHeroesCallback)
+    suspend fun getHeroes(pageNo: Int, callback: LoadHeroesCallback)
 
     fun getComics(heroId: String, pageNo: Int, callback: LoadComicsCallback)
 }

@@ -12,6 +12,9 @@ import com.mihodihasan.marvelsuperheroes.network.ApiInterface
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
+import java.util.concurrent.ArrayBlockingQueue
+import java.util.concurrent.ThreadPoolExecutor
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -35,14 +38,24 @@ class AppModule {
     }
     @Singleton
     @Provides
-    fun providesUseCaseThreadPoolScheduler(useCaseThreadPoolScheduler: UseCaseThreadPoolScheduler): UseCaseScheduler {
-        return UseCaseThreadPoolScheduler()
+    fun providesUseCaseThreadPoolScheduler(mThreadPoolExecutor: ThreadPoolExecutor): UseCaseScheduler {
+        return UseCaseThreadPoolScheduler(mThreadPoolExecutor)
     }
 
     @Singleton
     @Provides
     fun providesMainPresenter(mUseCaseHandler: UseCaseHandler, getHeroList: GetHeroList): MainContract.Presenter {
         return MainPresenter(mUseCaseHandler, getHeroList)
+    }
+
+ @Singleton
+    @Provides
+    fun providesThreadPoolExecutor(): ThreadPoolExecutor {
+        return ThreadPoolExecutor(
+            2, 4,
+            30.toLong(),
+            TimeUnit.SECONDS, ArrayBlockingQueue(2)
+        )
     }
 
 

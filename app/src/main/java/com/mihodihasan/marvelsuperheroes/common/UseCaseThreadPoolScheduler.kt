@@ -7,7 +7,7 @@ import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class UseCaseThreadPoolScheduler @Inject constructor(): UseCaseScheduler {
+class UseCaseThreadPoolScheduler @Inject constructor(val mThreadPoolExecutor: ThreadPoolExecutor): UseCaseScheduler {
 
     private val mHandler: Handler = Handler(Looper.getMainLooper())
 
@@ -18,14 +18,8 @@ class UseCaseThreadPoolScheduler @Inject constructor(): UseCaseScheduler {
 
     private val TIMEOUT = 30
 
-    var mThreadPoolExecutor: ThreadPoolExecutor? = null
-
     fun UseCaseThreadPoolScheduler() {
-        mThreadPoolExecutor = ThreadPoolExecutor(
-            POOL_SIZE, MAX_POOL_SIZE,
-            TIMEOUT.toLong(),
-            TimeUnit.SECONDS, ArrayBlockingQueue(POOL_SIZE)
-        )
+
     }
 
     override fun execute(runnable: Runnable) {

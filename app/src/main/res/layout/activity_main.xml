@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_list_recycler"
-        tools:listitem="@layout/item_view_top_bar"
+        tools:listitem="@layout/item_view_main_list"
         />
 
     <ProgressBar
@@ -39,6 +39,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_view_main_list" />
+        tools:listitem="@layout/item_view_top_bar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

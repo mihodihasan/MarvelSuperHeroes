@@ -1,5 +1,5 @@
 package com.mihodihasan.marvelsuperheroes.main.model
 
-class Comics {
-
-}
+data class Comics (
+    val story:String
+)

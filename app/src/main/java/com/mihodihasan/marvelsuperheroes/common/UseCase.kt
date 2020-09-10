@@ -5,7 +5,7 @@ abstract class UseCase<Q : UseCase.RequestValues, P : UseCase.ResponseValue> {
 
     lateinit var mUseCaseCallback: UseCaseCallback<P>
 
-    open fun run() {
+    fun run() {
         executeUseCase(mRequestValues)
     }
 
