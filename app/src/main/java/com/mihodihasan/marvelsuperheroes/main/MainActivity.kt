@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mihodihasan.marvelsuperheroes.HeroApp
 import com.mihodihasan.marvelsuperheroes.R
+import com.mihodihasan.marvelsuperheroes.common.BaseActivity
 import com.mihodihasan.marvelsuperheroes.main.adapter.CharacterAdapter
 import com.mihodihasan.marvelsuperheroes.main.adapter.ContentAdapter
 import com.mihodihasan.marvelsuperheroes.main.model.Comics
@@ -18,7 +19,7 @@ import com.mihodihasan.marvelsuperheroes.utils.toast
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), MainContract.View {
+class MainActivity : BaseActivity(), MainContract.View {
     @Inject
     lateinit var presenter: MainContract.Presenter
     private lateinit var characterAdapter: CharacterAdapter

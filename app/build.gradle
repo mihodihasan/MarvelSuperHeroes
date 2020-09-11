@@ -27,6 +27,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
 }
 
 dependencies {
@@ -52,6 +56,7 @@ dependencies {
     //retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     //Moshi support for the core Moshi JSON library, and for Moshi's Kotlin support
     implementation "com.squareup.moshi:moshi:$version_moshi"
     implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
@@ -60,6 +65,17 @@ dependencies {
             exclude group: 'org.json', module: 'json'
         }
     }
+    //room
+    implementation "androidx.room:room-coroutines:$room_version"
+    implementation "androidx.room:room-runtime:$room_version"
+//    implementation "androidx.room:room-ktx:2.2.5"
+    kapt "androidx.room:room-compiler:$room_version"
+//    androidTestImplementation "androidx.room:room-testing:$room_version"
+    //Timber
+    implementation "com.jakewharton.timber:timber:$timber_version"
+    implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    //Calligraphy / Typeface Lib
+    implementation 'io.github.inflationx:viewpump:2.0.3'
     //coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"

@@ -1,6 +1,8 @@
 package com.mihodihasan.marvelsuperheroes.main.model
 
+import java.io.Serializable
+
 data class ComicsImage (
-    var path: String,
-    var extension: String
-)
+    val path: String,
+    val extension: String
+):Serializable
