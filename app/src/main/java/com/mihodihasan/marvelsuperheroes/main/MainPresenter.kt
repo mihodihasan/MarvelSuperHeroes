@@ -22,6 +22,7 @@ class MainPresenter constructor(private val mUseCaseHandler: UseCaseHandler, pri
                     mMainView?.hideTopBarLoading()
                     mMainView?.displayHeroesAvatar(response.getHeroesList())
                     loadComics(response.getHeroesList()[0].id, 0)
+                    if (pageNumber==0) mMainView?.stopTopShimmering()
                 }
 
                 override fun onError() {
@@ -38,6 +39,7 @@ class MainPresenter constructor(private val mUseCaseHandler: UseCaseHandler, pri
             override fun onSuccess(response: GetComicsList.ResponseValue) {
                 mMainView?.hideMainContentViewLoading()
                 mMainView?.displayComicsList(response.getComicsList())
+                if (pageNumber==0) mMainView?.stopContentShimmering()
             }
 
             override fun onError() {

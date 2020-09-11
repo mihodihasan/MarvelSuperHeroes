@@ -47,6 +47,19 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         contentAdapter.notifyDataSetChanged()
     }
 
+    override fun stopTopShimmering(){
+        top_shimmer.stopShimmer()
+        top_shimmer.hide()
+        top_list_recycler.show()
+    }
+
+    override fun stopContentShimmering(){
+        content_shimmer.stopShimmer()
+        content_shimmer.hide()
+        content_recycler.show()
+    }
+
+
     override fun onResume() {
         super.onResume()
         presenter.initView(this)

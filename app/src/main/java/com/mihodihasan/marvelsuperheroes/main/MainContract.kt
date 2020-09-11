@@ -10,6 +10,8 @@ interface MainContract {
 
     interface View : BaseView<Presenter> {
         fun showTopBarLoading()
+        fun stopTopShimmering()
+        fun stopContentShimmering()
         fun showMainContentViewLoading()
         fun hideTopBarLoading()
         fun hideMainContentViewLoading()
