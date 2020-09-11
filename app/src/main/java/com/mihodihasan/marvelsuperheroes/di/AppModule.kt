@@ -7,6 +7,7 @@ import com.mihodihasan.marvelsuperheroes.common.UseCaseScheduler
 import com.mihodihasan.marvelsuperheroes.common.UseCaseThreadPoolScheduler
 import com.mihodihasan.marvelsuperheroes.main.MainContract
 import com.mihodihasan.marvelsuperheroes.main.MainPresenter
+import com.mihodihasan.marvelsuperheroes.main.usecase.GetComicsList
 import com.mihodihasan.marvelsuperheroes.main.usecase.GetHeroList
 import com.mihodihasan.marvelsuperheroes.network.ApiInterface
 import dagger.Module
@@ -44,8 +45,8 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun providesMainPresenter(mUseCaseHandler: UseCaseHandler, getHeroList: GetHeroList): MainContract.Presenter {
-        return MainPresenter(mUseCaseHandler, getHeroList)
+    fun providesMainPresenter(mUseCaseHandler: UseCaseHandler, getHeroList: GetHeroList, getComicsList: GetComicsList): MainContract.Presenter {
+        return MainPresenter(mUseCaseHandler, getHeroList, getComicsList)
     }
 
  @Singleton

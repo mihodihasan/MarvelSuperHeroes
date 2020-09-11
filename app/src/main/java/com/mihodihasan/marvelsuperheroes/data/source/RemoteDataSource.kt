@@ -55,7 +55,7 @@ class RemoteDataSource @Inject constructor(
         }
     }
 
-    suspend fun getComics(heroId:Int, pageNo: Int): ResultData<MutableList<ComicsResult>> {
+    suspend fun getComics(heroId:String, pageNo: Int): ResultData<MutableList<ComicsResult>> {
         val result = withContext(ioDispatcher) {
             try {
                 val offset: Int = pageNo * 25
@@ -65,13 +65,13 @@ class RemoteDataSource @Inject constructor(
                 val encodedHash = decodedHash.md5()
                 val comicsResponse =
                     apiInterface.getComics(
-                        "name",
+                        "title",
                         "".plus(limit),
                         "".plus(offset),
                         "9fd2b96ccdc0acf33d90224c98207a49",
                         "".plus(encodedHash),
                         "".plus(timestamp),
-                        "".plus(heroId),
+                        heroId,
                         ""
                     )
                 ResultData.Success(comicsResponse.data.results)

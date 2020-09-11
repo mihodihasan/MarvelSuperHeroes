@@ -41,7 +41,7 @@ class GetComicsList @Inject constructor(private val repository: Repository) :
     }
 
     class ResponseValue(private val comicsList: MutableList<ComicsResult>) : UseCase.ResponseValue {
-        fun getHeroesList(): MutableList<ComicsResult> = comicsList
+        fun getComicsList(): MutableList<ComicsResult> = comicsList
     }
 
 }

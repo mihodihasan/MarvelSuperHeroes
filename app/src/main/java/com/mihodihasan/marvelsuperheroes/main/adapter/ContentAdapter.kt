@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.mihodihasan.marvelsuperheroes.R
 import com.mihodihasan.marvelsuperheroes.main.model.Comics
+import com.mihodihasan.marvelsuperheroes.main.model.ComicsResult
 import kotlinx.android.synthetic.main.item_view_main_list.view.*
 
-class ContentAdapter(val context: Context, private val list: MutableList<Comics>) : RecyclerView.Adapter<ContentAdapter.ContentVH>() {
+class ContentAdapter(val context: Context, private val list: MutableList<ComicsResult>) : RecyclerView.Adapter<ContentAdapter.ContentVH>() {
 
     class ContentVH(itemView:View):RecyclerView.ViewHolder(itemView)
 
@@ -17,7 +18,7 @@ class ContentAdapter(val context: Context, private val list: MutableList<Comics>
         R.layout.item_view_main_list, parent, false))
 
     override fun onBindViewHolder(holder: ContentVH, position: Int) {
-        holder.itemView.textView.text = list[position].story
+        holder.itemView.textView.text = list[position].description
     }
 
     override fun getItemCount(): Int = list.size

@@ -22,7 +22,7 @@ class Repository @Inject constructor(private val localDataSource: LocalDataSourc
 
     override suspend fun getComics(heroId: String, pageNo: Int, callback: DataSource.LoadComicsCallback) {
         try {
-            when (val response = remoteDataSource.getHeroes(pageNo)) {
+            when (val response = remoteDataSource.getComics(heroId, pageNo)) {
                 is ResultData.Success -> {
                     callback.onComicsLoaded(response.data)
                 }

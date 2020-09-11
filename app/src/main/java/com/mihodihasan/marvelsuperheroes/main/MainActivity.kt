@@ -9,6 +9,7 @@ import com.mihodihasan.marvelsuperheroes.R
 import com.mihodihasan.marvelsuperheroes.main.adapter.CharacterAdapter
 import com.mihodihasan.marvelsuperheroes.main.adapter.ContentAdapter
 import com.mihodihasan.marvelsuperheroes.main.model.Comics
+import com.mihodihasan.marvelsuperheroes.main.model.ComicsResult
 import com.mihodihasan.marvelsuperheroes.main.model.Hero
 import com.mihodihasan.marvelsuperheroes.main.model.HeroResult
 import com.mihodihasan.marvelsuperheroes.utils.hide
@@ -22,8 +23,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     lateinit var presenter: MainContract.Presenter
     private lateinit var characterAdapter: CharacterAdapter
     private lateinit var characterList: MutableList<HeroResult>
-    lateinit var contentAdapter: ContentAdapter
-    private lateinit var contentList: MutableList<Comics>
+    private lateinit var contentAdapter: ContentAdapter
+    private lateinit var contentList: MutableList<ComicsResult>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as HeroApp).appComponent.inject(this)
@@ -43,20 +44,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         content_recycler.adapter = contentAdapter
         content_recycler.layoutManager =
             LinearLayoutManager(this)
-
-        contentList.add(Comics("A Quick Brown Fox Jumps Over The Lazy Dog!"))
-        contentList.add(Comics("A Quick Brown Fox Jumps Over The Lazy Dog!"))
-        contentList.add(Comics("A Quick Brown Fox Jumps Over The Lazy Dog!"))
-        contentList.add(Comics("A Quick Brown Fox Jumps Over The Lazy Dog!"))
-        contentList.add(Comics("A Quick Brown Fox Jumps Over The Lazy Dog!"))
-        contentList.add(Comics("A Quick Brown Fox Jumps Over The Lazy Dog!"))
-        contentList.add(Comics("A Quick Brown Fox Jumps Over The Lazy Dog!"))
-        contentList.add(Comics("A Quick Brown Fox Jumps Over The Lazy Dog!"))
-        contentList.add(Comics("A Quick Brown Fox Jumps Over The Lazy Dog!"))
-        contentList.add(Comics("A Quick Brown Fox Jumps Over The Lazy Dog!"))
-        contentList.add(Comics("A Quick Brown Fox Jumps Over The Lazy Dog!"))
-        contentList.add(Comics("A Quick Brown Fox Jumps Over The Lazy Dog!"))
-        contentList.add(Comics("A Quick Brown Fox Jumps Over The Lazy Dog!"))
         contentAdapter.notifyDataSetChanged()
     }
 
@@ -91,7 +78,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         characterAdapter.notifyDataSetChanged()
     }
 
-    override fun displayComicsList(heroList: MutableList<Hero>) {
+    override fun displayComicsList(comicsList: MutableList<ComicsResult>) {
+        Log.d("RESULT_FROM_ACTIVITY", "displayHeroesAvatar: ".plus(comicsList.toString()))
+        contentList.addAll(comicsList)
+        contentAdapter.notifyDataSetChanged()
     }
 
     override fun displayErrorMessage(errMsg: String) {
