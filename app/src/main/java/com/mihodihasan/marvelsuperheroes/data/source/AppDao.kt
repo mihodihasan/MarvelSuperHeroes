@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.mihodihasan.marvelsuperheroes.main.model.ComicsResult
-import com.mihodihasan.marvelsuperheroes.main.model.Dummy
 import com.mihodihasan.marvelsuperheroes.main.model.HeroResult
 import com.mihodihasan.marvelsuperheroes.utils.Constants
 @Dao
