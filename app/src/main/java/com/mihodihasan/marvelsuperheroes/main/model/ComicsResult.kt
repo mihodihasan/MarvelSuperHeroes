@@ -12,7 +12,7 @@ class ComicsResult (
     @PrimaryKey @NotNull @NonNull val id : Int,
     @NotNull @NonNull val title: String,
     @NotNull @NonNull val modified: String,
-    @NotNull @NonNull val description: String/*,
-    val thumbnail: ComicsThumbnail?,
-    val images: List<ComicsImage?>*/
-)
+    @NotNull @NonNull val description: String,
+    val thumbnail: ComicsThumbnail,
+    val images: List<ComicsImage?>?
+) : Serializable

@@ -22,7 +22,7 @@ class ContentAdapter(val context: Context, private val list: MutableList<ComicsR
         holder.itemView.content_description.text = list[position].description
         holder.itemView.comic_title_tv.text = list[position].title
         holder.itemView.date_modified_tv.text = list[position].modified
-//        Picasso.get().load(list[position].thumbnail?.path.plus(".").plus(list[position].thumbnail?.extension).replace("http://","https://")).into(holder.itemView.content_img_view)
+        Picasso.get().load(list[position].thumbnail.path.plus(".").plus(list[position].thumbnail.extension).replace("http://","https://")).into(holder.itemView.content_img_view)
     }
 
     override fun getItemCount(): Int = list.size

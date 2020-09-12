@@ -3,10 +3,7 @@ package com.mihodihasan.marvelsuperheroes.utils
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.mihodihasan.marvelsuperheroes.main.model.ComicsResult
-import com.mihodihasan.marvelsuperheroes.main.model.ComicsThumbnail
-import com.mihodihasan.marvelsuperheroes.main.model.HeroResult
-import com.mihodihasan.marvelsuperheroes.main.model.HeroThumbnail
+import com.mihodihasan.marvelsuperheroes.main.model.*
 import java.io.Serializable
 import java.lang.reflect.Type
 
@@ -100,6 +97,27 @@ class RoomDataConverter : Serializable {
     @TypeConverter
     fun getComicsThumbnailListFromString(jsonString: String?): List<ComicsThumbnail?>? {
         val listType: Type = object : TypeToken<List<ComicsThumbnail?>?>() {}.type
+        return Gson().fromJson(jsonString, listType)
+    }
+    @TypeConverter
+    fun stringFromComicsImage(comicsThumbnail: ComicsImage?): String? {
+        return Gson().toJson(comicsThumbnail)
+    }
+
+    @TypeConverter
+    fun getComicsImageFromString(jsonString: String?): ComicsImage? {
+        val listType: Type = object : TypeToken<ComicsImage?>() {}.type
+        return Gson().fromJson(jsonString, listType)
+    }
+
+    @TypeConverter
+    fun stringFromComicsImageList(comicsThumbnail: List<ComicsImage?>?): String? {
+        return Gson().toJson(comicsThumbnail)
+    }
+
+    @TypeConverter
+    fun getComicsImageListFromString(jsonString: String?): List<ComicsImage?>? {
+        val listType: Type = object : TypeToken<List<ComicsImage?>?>() {}.type
         return Gson().fromJson(jsonString, listType)
     }
 

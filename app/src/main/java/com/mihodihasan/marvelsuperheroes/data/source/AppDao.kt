@@ -7,6 +7,7 @@ import androidx.room.Query
 import com.mihodihasan.marvelsuperheroes.main.model.ComicsResult
 import com.mihodihasan.marvelsuperheroes.main.model.HeroResult
 import com.mihodihasan.marvelsuperheroes.utils.Constants
+
 @Dao
 interface AppDao {
     @Query("SELECT * FROM ".plus(Constants.TABLE_NAME_COMICS))

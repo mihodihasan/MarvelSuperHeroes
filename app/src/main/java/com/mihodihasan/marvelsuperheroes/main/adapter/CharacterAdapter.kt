@@ -25,8 +25,7 @@ class CharacterAdapter(private val context: Context, private val charList: Mutab
 
     override fun onBindViewHolder(holder: CharacterVH, position: Int) {
         holder.itemView.nameTv.text = charList[position].name
-//        Log.d("LSNTAG", "onBindViewHolder: "+charList[position].thumbnail.path.plus(".").plus(charList[position].thumbnail.extension))
-//        Picasso.get().load(charList[position].thumbnail.path.plus(".").plus(charList[position].thumbnail.extension).replace("http://","https://")).into(holder.itemView.imageView)
+        Picasso.get().load(charList[position].thumbnail.path.plus(".").plus(charList[position].thumbnail.extension).replace("http://","https://")).into(holder.itemView.imageView)
     }
 
     override fun getItemCount(): Int = charList.size

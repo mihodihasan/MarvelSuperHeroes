@@ -76,5 +76,4 @@ class NetworkModule {
             .add(KotlinJsonAdapterFactory())
             .build()
     }
-
 }

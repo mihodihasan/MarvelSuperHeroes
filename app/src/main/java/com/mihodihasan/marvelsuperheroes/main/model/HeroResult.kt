@@ -10,6 +10,6 @@ import java.io.Serializable
 @Entity(tableName = Constants.TABLE_NAME_HEROES)
 data class HeroResult(
     @PrimaryKey @NotNull @NonNull val id: Int,
-    val name: String/*,
-    val thumbnail: HeroThumbnail?*/
-)
+    val name: String,
+    val thumbnail: HeroThumbnail
+):Serializable

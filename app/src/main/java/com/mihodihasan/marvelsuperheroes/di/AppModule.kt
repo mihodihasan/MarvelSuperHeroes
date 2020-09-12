@@ -26,12 +26,6 @@ class AppModule {
         return application
     }
 
-    /*@Singleton
-    @Provides
-    fun providesScheduler(): BaseScheduler {
-        return SchedulerProvider()
-    }*/
-
     @Singleton
     @Provides
     fun providesApi(retrofit: Retrofit): ApiInterface {
@@ -58,7 +52,4 @@ class AppModule {
             TimeUnit.SECONDS, ArrayBlockingQueue(2)
         )
     }
-
-
-
 }
