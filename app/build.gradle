@@ -83,4 +83,6 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    //view room db data
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 }

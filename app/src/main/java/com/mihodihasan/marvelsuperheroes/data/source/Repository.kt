@@ -58,7 +58,7 @@ class Repository @Inject constructor(
         ) {
             //local
             val list = mutableListOf<ComicsResult>()
-            list.addAll(localDataSource.getComics())
+            list.addAll(localDataSource.getComics(heroId))
             callback.onComicsLoaded(list)
         } else {
             //remote

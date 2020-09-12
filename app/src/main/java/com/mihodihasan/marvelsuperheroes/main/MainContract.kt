@@ -12,6 +12,7 @@ interface MainContract {
         fun showTopBarLoading()
         fun stopTopShimmering()
         fun stopContentShimmering()
+        fun startContentShimmering()
         fun showMainContentViewLoading()
         fun hideTopBarLoading()
         fun hideMainContentViewLoading()

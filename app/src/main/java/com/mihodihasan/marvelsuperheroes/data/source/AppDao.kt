@@ -10,8 +10,8 @@ import com.mihodihasan.marvelsuperheroes.utils.Constants
 
 @Dao
 interface AppDao {
-    @Query("SELECT * FROM ".plus(Constants.TABLE_NAME_COMICS))
-    suspend fun getComicsResultList(): List<ComicsResult>
+    @Query("SELECT * FROM TABLE_NAME_COMICS WHERE id = :heroId")
+    suspend fun getComicsResultList(heroId:String): List<ComicsResult>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun saveComicsListInLocalDb(comicsResultList: List<ComicsResult?>?)
