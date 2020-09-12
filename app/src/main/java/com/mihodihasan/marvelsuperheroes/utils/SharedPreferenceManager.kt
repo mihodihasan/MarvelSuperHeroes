@@ -5,13 +5,14 @@ import android.content.SharedPreferences
 import javax.inject.Inject
 
 class SharedPreferenceManager @Inject constructor(private val preferences: SharedPreferences) {
-    fun saveString(key: String, `val`: String?): Boolean {
-        preferences.edit().putString(key, `val`).apply()
+
+    fun saveString(key: String, value: String?): Boolean {
+        preferences.edit().putString(key, value).apply()
         return true
     }
 
-    fun saveInt(key: String, `val`: Int): Boolean {
-        preferences.edit().putInt(key, `val`).apply()
+    fun saveInt(key: String, value: Int): Boolean {
+        preferences.edit().putInt(key, value).apply()
         return true
     }
 

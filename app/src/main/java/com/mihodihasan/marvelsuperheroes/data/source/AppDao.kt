@@ -20,5 +20,5 @@ interface AppDao {
     suspend fun getHeroResultList(): List<HeroResult>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun setHeroResultList(heroResultList: List<HeroResult?>?)
+    suspend fun saveHeroListInLocalDb(heroResultList: List<HeroResult?>?)
 }

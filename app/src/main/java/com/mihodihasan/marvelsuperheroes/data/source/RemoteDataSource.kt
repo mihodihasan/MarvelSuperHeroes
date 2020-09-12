@@ -9,6 +9,8 @@ import com.mihodihasan.marvelsuperheroes.main.model.ComicsResult
 import com.mihodihasan.marvelsuperheroes.main.model.Hero
 import com.mihodihasan.marvelsuperheroes.main.model.HeroResult
 import com.mihodihasan.marvelsuperheroes.network.ApiInterface
+import com.mihodihasan.marvelsuperheroes.utils.Constants
+import com.mihodihasan.marvelsuperheroes.utils.SharedPreferenceManager
 import com.mihodihasan.marvelsuperheroes.utils.md5
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.plus
@@ -90,5 +92,4 @@ class RemoteDataSource @Inject constructor(
             }
         }
     }
-
 }

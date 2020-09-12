@@ -1,16 +1,25 @@
 package com.mihodihasan.marvelsuperheroes.data.source
 
+import com.mihodihasan.marvelsuperheroes.di.IoDispatcher
 import com.mihodihasan.marvelsuperheroes.main.model.Comics
+import com.mihodihasan.marvelsuperheroes.main.model.ComicsResult
 import com.mihodihasan.marvelsuperheroes.main.model.Hero
+import com.mihodihasan.marvelsuperheroes.main.model.HeroResult
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class LocalDataSource @Inject constructor(val appDao: AppDao){
+class LocalDataSource @Inject constructor(@IoDispatcher private val ioDispatcher: CoroutineDispatcher, private val appDao: AppDao){
 
-    fun getHeroes():MutableList<Hero>{
-        return mutableListOf()
+    suspend fun getHeroes():List<HeroResult>{
+        return withContext(ioDispatcher){appDao.getHeroResultList()}
     }
-    fun getComics():MutableList<Comics>{
-        return mutableListOf()
+    suspend fun getComics():List<ComicsResult>{
+        return withContext(ioDispatcher){appDao.getComicsResultList()}
     }
-
+    suspend fun saveHeroes(heroList: List<HeroResult?>?){
+        withContext(ioDispatcher){
+            appDao.saveHeroListInLocalDb(heroList)
+        }
+    }
 }

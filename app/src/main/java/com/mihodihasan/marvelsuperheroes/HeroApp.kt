@@ -14,25 +14,25 @@ class HeroApp : Application() {
     }
     override fun onCreate() {
         super.onCreate()
-        /*ViewPump.init(
+        ViewPump.init(
             ViewPump.builder()
                 .addInterceptor(
                     CalligraphyInterceptor(
                         CalligraphyConfig.Builder()
-                            .setDefaultFontPath("fonts/roboto_mono.ttf")
+                            .setDefaultFontPath("fonts/lato-reg.ttf")
                             .setFontAttrId(R.attr.fontPath)
                             .build()
                     )
                 )
                 .build()
-        )*/
-        /*if (BuildConfig.DEBUG) {
+        )
+        if (BuildConfig.DEBUG) {
             Timber.plant(object : Timber.DebugTree() {
                 override fun createStackElementTag(element: StackTraceElement): String? {
                     return super.createStackElementTag(element) + ": line-number " + element.lineNumber
                 }
             })
-        }*/
+        }
 
         DaggerAppComponent.builder().application(this).build().inject(this)
     }
