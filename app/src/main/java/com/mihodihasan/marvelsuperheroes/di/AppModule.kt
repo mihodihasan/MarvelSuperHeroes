@@ -2,6 +2,7 @@ package com.mihodihasan.marvelsuperheroes.di
 
 import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import com.mihodihasan.marvelsuperheroes.common.UseCaseHandler
 import com.mihodihasan.marvelsuperheroes.common.UseCaseScheduler
 import com.mihodihasan.marvelsuperheroes.common.UseCaseThreadPoolScheduler
@@ -50,6 +51,15 @@ class AppModule {
             2, 4,
             30.toLong(),
             TimeUnit.SECONDS, ArrayBlockingQueue(2)
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun providesSharedPreferencesEditor(context:Context): SharedPreferences {
+        return context.getSharedPreferences(
+            "MARVEL_HERO_PREFS",
+            Context.MODE_PRIVATE
         )
     }
 }
