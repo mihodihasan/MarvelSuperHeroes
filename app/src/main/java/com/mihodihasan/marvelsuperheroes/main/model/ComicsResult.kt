@@ -14,5 +14,6 @@ class ComicsResult (
     @NotNull @NonNull val modified: String,
     @NotNull @NonNull val description: String?,
     val thumbnail: ComicsThumbnail,
-    val images: List<ComicsImage?>?
+    val images: List<ComicsImage?>?,
+    val characters: Characters?
 ) : Serializable

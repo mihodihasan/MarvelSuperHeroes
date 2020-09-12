@@ -15,7 +15,7 @@ class LocalDataSource @Inject constructor(@IoDispatcher private val ioDispatcher
         return withContext(ioDispatcher){appDao.getHeroResultList()}
     }
     suspend fun getComics(heroId:String):List<ComicsResult>{
-        return withContext(ioDispatcher){appDao.getComicsResultList(heroId)}
+        return withContext(ioDispatcher){appDao.getComicsResultList("%".plus(heroId).plus("%"))}
     }
     suspend fun saveHeroes(heroList: List<HeroResult?>?){
         withContext(ioDispatcher){

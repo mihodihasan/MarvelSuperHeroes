@@ -16,12 +16,21 @@ class SharedPreferenceManager @Inject constructor(private val preferences: Share
         return true
     }
 
+    fun saveBool(key: String, value: Boolean): Boolean {
+        preferences.edit().putBoolean(key, value).apply()
+        return true
+    }
+
     fun getString(key: String): String? {
         return preferences.getString(key, null)
     }
 
     fun getInt(key: String): Int {
         return preferences.getInt(key, -1)
+    }
+
+    fun getBool(key: String): Boolean {
+        return preferences.getBoolean(key, false)
     }
 
 }

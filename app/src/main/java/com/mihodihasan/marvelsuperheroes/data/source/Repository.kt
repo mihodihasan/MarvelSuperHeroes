@@ -54,7 +54,7 @@ class Repository @Inject constructor(
         val diffWithLastHit = getTimeDiffInMillis(
             sharedPreferenceManager.getString(Constants.CONTENT_API_LAST_HIT)
         )
-        if (sharedPreferenceManager.getInt(Constants.CONTENT_API_MAX_PAGE) >= pageNo || (diffWithLastHit < 1000 * 60 * 3 && diffWithLastHit != 0L)
+        if (sharedPreferenceManager.getBool(heroId) && (sharedPreferenceManager.getInt(Constants.CONTENT_API_MAX_PAGE) >= pageNo || (diffWithLastHit < 1000 * 60 * 3 && diffWithLastHit != 0L))
         ) {
             //local
             val list = mutableListOf<ComicsResult>()
@@ -70,6 +70,7 @@ class Repository @Inject constructor(
                             Date().toString()
                         )
                         sharedPreferenceManager.saveInt(Constants.CONTENT_API_MAX_PAGE, pageNo)
+                        sharedPreferenceManager.saveBool(heroId, true)
                         localDataSource.saveComics(response.data)
                         callback.onComicsLoaded(response.data)
                     }

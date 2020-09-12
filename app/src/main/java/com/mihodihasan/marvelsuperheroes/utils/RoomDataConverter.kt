@@ -121,5 +121,38 @@ class RoomDataConverter : Serializable {
         return Gson().fromJson(jsonString, listType)
     }
 
+    @TypeConverter
+    fun stringFromCharacters(comicsThumbnail: Characters?): String? {
+        return Gson().toJson(comicsThumbnail)
+    }
+
+    @TypeConverter
+    fun getCharactersFromString(jsonString: String?): Characters? {
+        val listType: Type = object : TypeToken<Characters?>() {}.type
+        return Gson().fromJson(jsonString, listType)
+    }
+
+    @TypeConverter
+    fun stringFromSingleCharacter(comicsThumbnail: SingleCharacter?): String? {
+        return Gson().toJson(comicsThumbnail)
+    }
+
+    @TypeConverter
+    fun getSingleCharacterFromString(jsonString: String?): SingleCharacter? {
+        val listType: Type = object : TypeToken<SingleCharacter?>() {}.type
+        return Gson().fromJson(jsonString, listType)
+    }
+
+    @TypeConverter
+    fun stringSingleCharacterList(comicsThumbnail: List<SingleCharacter?>?): String? {
+        return Gson().toJson(comicsThumbnail)
+    }
+
+    @TypeConverter
+    fun getSingleCharacterListFromString(jsonString: String?): List<SingleCharacter?>? {
+        val listType: Type = object : TypeToken<List<SingleCharacter?>?>() {}.type
+        return Gson().fromJson(jsonString, listType)
+    }
+
 
 }
