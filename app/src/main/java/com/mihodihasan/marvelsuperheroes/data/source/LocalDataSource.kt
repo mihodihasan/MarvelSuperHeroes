@@ -22,4 +22,10 @@ class LocalDataSource @Inject constructor(@IoDispatcher private val ioDispatcher
             appDao.saveHeroListInLocalDb(heroList)
         }
     }
+    suspend fun saveComics(comicsList: List<ComicsResult?>?){
+        withContext(ioDispatcher){
+            appDao.saveComicsListInLocalDb(comicsList)
+        }
+    }
+
 }

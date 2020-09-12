@@ -14,7 +14,7 @@ interface AppDao {
     suspend fun getComicsResultList(): List<ComicsResult>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun setComicsResultList(comicsResultList: List<ComicsResult?>?)
+    suspend fun saveComicsListInLocalDb(comicsResultList: List<ComicsResult?>?)
 
     @Query("SELECT * FROM ".plus(Constants.TABLE_NAME_HEROES))
     suspend fun getHeroResultList(): List<HeroResult>
