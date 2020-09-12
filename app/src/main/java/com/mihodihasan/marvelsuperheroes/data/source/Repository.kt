@@ -33,6 +33,7 @@ class Repository @Inject constructor(
                             Date().toString()
                         )
                         sharedPreferenceManager.saveInt(Constants.HEROES_API_MAX_PAGE, pageNo)
+                        if (pageNo == 0) localDataSource.cleanLocalDb()
                         localDataSource.saveHeroes(response.data)
                         callback.onHeroesLoaded(response.data)
                     }

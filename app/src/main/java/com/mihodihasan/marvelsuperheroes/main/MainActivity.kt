@@ -3,6 +3,7 @@ package com.mihodihasan.marvelsuperheroes.main
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mihodihasan.marvelsuperheroes.HeroApp
 import com.mihodihasan.marvelsuperheroes.R
 import com.mihodihasan.marvelsuperheroes.common.BaseActivity
@@ -23,6 +24,7 @@ class MainActivity : BaseActivity(), MainContract.View {
     private lateinit var contentAdapter: ContentAdapter
     private lateinit var contentList: MutableList<ComicsResult>
     private var comicsPageNumber:Int = 0
+    private lateinit var topLinearManager:LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as HeroApp).appComponent.inject(this)
@@ -34,8 +36,9 @@ class MainActivity : BaseActivity(), MainContract.View {
         characterAdapter = CharacterAdapter(this, characterList)
         contentAdapter = ContentAdapter(this, contentList)
         top_list_recycler.adapter = characterAdapter
-        top_list_recycler.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        topLinearManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        top_list_recycler.layoutManager = topLinearManager
+
         top_list_recycler.isNestedScrollingEnabled = true
         top_list_recycler.setHasFixedSize(true)
 
@@ -57,6 +60,12 @@ class MainActivity : BaseActivity(), MainContract.View {
                 }
             })
         )
+
+        top_list_recycler.addOnScrollListener(object :EndlessRecyclerViewScrollListener(topLinearManager){
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?){
+                presenter.loadMarvelHeroes(page)
+            }
+        })
     }
 
     override fun stopTopShimmering(){
@@ -107,6 +116,7 @@ class MainActivity : BaseActivity(), MainContract.View {
         Timber.d("displayHeroesAvatar: ".plus(heroList.toString()))
         characterList.addAll(heroList)
         characterAdapter.notifyDataSetChanged()
+        if (heroList.size == 0) characterAdapter.stopContinueLoading()
     }
 
     override fun displayComicsList(comicsList: MutableList<ComicsResult>) {

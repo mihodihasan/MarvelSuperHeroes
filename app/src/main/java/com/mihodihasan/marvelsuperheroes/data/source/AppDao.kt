@@ -20,4 +20,12 @@ interface AppDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun saveHeroListInLocalDb(heroResultList: List<HeroResult?>?)
+
+    @Query("DELETE from TABLE_NAME_COMICS")
+    suspend fun deleteAllComics()
+
+    @Query("DELETE from TABLE_NAME_HEROES")
+    suspend fun deleteAllHeroes()
+
+
 }

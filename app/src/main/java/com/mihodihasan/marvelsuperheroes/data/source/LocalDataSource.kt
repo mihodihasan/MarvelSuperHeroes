@@ -28,4 +28,11 @@ class LocalDataSource @Inject constructor(@IoDispatcher private val ioDispatcher
         }
     }
 
+    suspend fun cleanLocalDb(){
+        withContext(ioDispatcher){
+            appDao.deleteAllComics()
+            appDao.deleteAllHeroes()
+        }
+    }
+
 }

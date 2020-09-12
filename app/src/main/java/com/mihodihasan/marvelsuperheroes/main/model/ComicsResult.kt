@@ -7,7 +7,7 @@ import com.mihodihasan.marvelsuperheroes.utils.Constants
 import org.jetbrains.annotations.NotNull
 import java.io.Serializable
 
-@Entity(tableName = Constants.TABLE_NAME_COMICS)
+@Entity(tableName = "TABLE_NAME_COMICS")
 class ComicsResult (
     @PrimaryKey @NotNull @NonNull val id : Int,
     @NotNull @NonNull val title: String,
