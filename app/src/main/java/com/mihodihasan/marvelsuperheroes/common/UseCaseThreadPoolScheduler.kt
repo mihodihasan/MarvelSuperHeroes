@@ -25,6 +25,6 @@ class UseCaseThreadPoolScheduler @Inject constructor(private val mThreadPoolExec
     override fun <V : UseCase.ResponseValue> onError(
         useCaseCallback: UseCase.UseCaseCallback<V>
     ) {
-        mHandler.post { useCaseCallback.onError() }
+        mHandler.post { useCaseCallback.onError("Something Went Wrong") }
     }
 }

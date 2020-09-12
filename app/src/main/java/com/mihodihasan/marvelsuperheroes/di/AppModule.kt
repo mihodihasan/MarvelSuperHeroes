@@ -11,6 +11,7 @@ import com.mihodihasan.marvelsuperheroes.main.MainPresenter
 import com.mihodihasan.marvelsuperheroes.main.usecase.GetComicsList
 import com.mihodihasan.marvelsuperheroes.main.usecase.GetHeroList
 import com.mihodihasan.marvelsuperheroes.network.ApiInterface
+import com.mihodihasan.marvelsuperheroes.utils.SharedPreferenceManager
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -40,8 +41,8 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun providesMainPresenter(mUseCaseHandler: UseCaseHandler, getHeroList: GetHeroList, getComicsList: GetComicsList): MainContract.Presenter {
-        return MainPresenter(mUseCaseHandler, getHeroList, getComicsList)
+    fun providesMainPresenter(mUseCaseHandler: UseCaseHandler, getHeroList: GetHeroList, getComicsList: GetComicsList, sharedPreferenceManager: SharedPreferenceManager): MainContract.Presenter {
+        return MainPresenter(mUseCaseHandler, getHeroList, getComicsList, sharedPreferenceManager)
     }
 
  @Singleton

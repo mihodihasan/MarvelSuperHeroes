@@ -47,7 +47,7 @@ class UseCaseHandler @Inject constructor(private val mUseCaseScheduler: UseCaseS
             mUseCaseHandler.notifyResponse(response, mCallback)
         }
 
-        override fun onError() {
+        override fun onError(errMsg:String) {
             mUseCaseHandler.notifyError(mCallback)
         }
 

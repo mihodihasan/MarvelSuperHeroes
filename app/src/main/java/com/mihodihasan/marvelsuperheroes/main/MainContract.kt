@@ -9,13 +9,9 @@ import com.mihodihasan.marvelsuperheroes.main.model.HeroResult
 interface MainContract {
 
     interface View : BaseView<Presenter> {
-        fun showTopBarLoading()
         fun stopTopShimmering()
         fun stopContentShimmering()
         fun startContentShimmering()
-        fun showMainContentViewLoading()
-        fun hideTopBarLoading()
-        fun hideMainContentViewLoading()
         fun displayHeroesAvatar(heroList: MutableList<HeroResult>)
         fun displayComicsList(comicsList: MutableList<ComicsResult>)
         fun displayErrorMessage(errMsg:String)

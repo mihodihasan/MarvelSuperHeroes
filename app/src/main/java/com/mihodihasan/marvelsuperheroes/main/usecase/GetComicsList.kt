@@ -28,8 +28,8 @@ class GetComicsList @Inject constructor(private val repository: Repository) :
                         mUseCaseCallback.onSuccess(responseValue)
                     }
 
-                    override fun onDataNotAvailable() {
-                        mUseCaseCallback.onError()
+                    override fun onDataNotAvailable(msg:String) {
+                        mUseCaseCallback.onError(msg)
                     }
                 })
         }

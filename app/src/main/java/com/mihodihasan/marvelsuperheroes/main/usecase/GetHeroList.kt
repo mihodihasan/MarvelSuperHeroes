@@ -26,8 +26,8 @@ class GetHeroList @Inject constructor(private val repository: Repository) :
                     mUseCaseCallback.onSuccess(responseValue)
                 }
 
-                override fun onDataNotAvailable() {
-                    mUseCaseCallback.onError()
+                override fun onDataNotAvailable(errMsg:String) {
+                    mUseCaseCallback.onError(errMsg)
                 }
             })
         }

@@ -17,8 +17,9 @@ class Repository @Inject constructor(
         val diffWithLastHit = getTimeDiffInMillis(
             sharedPreferenceManager.getString(Constants.HEROES_API_LAST_HIT)
         )
-        if (sharedPreferenceManager.getInt(Constants.HEROES_API_MAX_PAGE) >= pageNo || (diffWithLastHit < 1000 * 60 * 3 && diffWithLastHit != 0L)
-        ) {
+        val isThisPageLoadedEarlier = sharedPreferenceManager.getInt(Constants.HEROES_API_MAX_PAGE) >= pageNo
+        val thisApiHitWithinThreshold = diffWithLastHit < Constants.API_HIT_THRESHOLD && diffWithLastHit != 0L
+        if ( isThisPageLoadedEarlier && thisApiHitWithinThreshold) {
             //fetch from local
             val list = mutableListOf<HeroResult>()
             list.addAll(localDataSource.getHeroes())
@@ -38,11 +39,11 @@ class Repository @Inject constructor(
                         callback.onHeroesLoaded(response.data)
                     }
                     is ResultData.Error -> {
-                        callback.onDataNotAvailable()
+                        callback.onDataNotAvailable(response.exception)
                     }
                 }
             } catch (exception: Exception) {
-                callback.onDataNotAvailable()
+                callback.onDataNotAvailable(exception.toString())
             }
         }
     }
@@ -55,8 +56,10 @@ class Repository @Inject constructor(
         val diffWithLastHit = getTimeDiffInMillis(
             sharedPreferenceManager.getString(Constants.CONTENT_API_LAST_HIT)
         )
-        if (sharedPreferenceManager.getBool(heroId) && (sharedPreferenceManager.getInt(Constants.CONTENT_API_MAX_PAGE) >= pageNo || (diffWithLastHit < 1000 * 60 * 3 && diffWithLastHit != 0L))
-        ) {
+        val isThisHeroComicLoadedEarlier = sharedPreferenceManager.getBool(heroId)
+        val isCurrentPageIsAlreadyLoadedEarlier = sharedPreferenceManager.getInt(Constants.CONTENT_API_MAX_PAGE) >= pageNo
+        val isApiHitWithinThresholdTime = (diffWithLastHit < Constants.API_HIT_THRESHOLD) &&  (diffWithLastHit != 0L)
+        if (isThisHeroComicLoadedEarlier && isCurrentPageIsAlreadyLoadedEarlier && isApiHitWithinThresholdTime) {
             //local
             val list = mutableListOf<ComicsResult>()
             list.addAll(localDataSource.getComics(heroId))
@@ -76,11 +79,11 @@ class Repository @Inject constructor(
                         callback.onComicsLoaded(response.data)
                     }
                     is ResultData.Error -> {
-                        callback.onDataNotAvailable()
+                        callback.onDataNotAvailable(response.exception)
                     }
                 }
             } catch (exception: Exception) {
-                callback.onDataNotAvailable()
+                callback.onDataNotAvailable(exception.toString())
             }
         }
     }

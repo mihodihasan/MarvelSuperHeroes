@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.mihodihasan.marvelsuperheroes.HeroApp
 import com.mihodihasan.marvelsuperheroes.R
 import com.mihodihasan.marvelsuperheroes.common.BaseActivity
@@ -23,8 +24,9 @@ class MainActivity : BaseActivity(), MainContract.View {
     private lateinit var characterList: MutableList<HeroResult>
     private lateinit var contentAdapter: ContentAdapter
     private lateinit var contentList: MutableList<ComicsResult>
-    private var comicsPageNumber:Int = 0
-    private lateinit var topLinearManager:LinearLayoutManager
+    private var comicsPageNumber: Int = 0
+    private lateinit var topLinearManager: LinearLayoutManager
+    private lateinit var contentLinearManager: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as HeroApp).appComponent.inject(this)
@@ -43,8 +45,8 @@ class MainActivity : BaseActivity(), MainContract.View {
         top_list_recycler.setHasFixedSize(true)
 
         content_recycler.adapter = contentAdapter
-        content_recycler.layoutManager =
-            LinearLayoutManager(this)
+        contentLinearManager = LinearLayoutManager(this)
+        content_recycler.layoutManager = contentLinearManager
         contentAdapter.notifyDataSetChanged()
 
         top_list_recycler.addOnItemTouchListener(
@@ -61,26 +63,34 @@ class MainActivity : BaseActivity(), MainContract.View {
             })
         )
 
-        top_list_recycler.addOnScrollListener(object :EndlessRecyclerViewScrollListener(topLinearManager){
-            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?){
+        top_list_recycler.addOnScrollListener(object :
+            EndlessRecyclerViewScrollListener(topLinearManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                 presenter.loadMarvelHeroes(page)
+            }
+        })
+
+        content_recycler.addOnScrollListener(object :
+            EndlessRecyclerViewScrollListener(contentLinearManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+                presenter.loadComics(-1, page)
             }
         })
     }
 
-    override fun stopTopShimmering(){
+    override fun stopTopShimmering() {
         top_shimmer.stopShimmer()
         top_shimmer.hide()
         top_list_recycler.show()
     }
 
-    override fun stopContentShimmering(){
+    override fun stopContentShimmering() {
         content_shimmer.stopShimmer()
         content_shimmer.hide()
         content_recycler.show()
     }
 
-    override fun startContentShimmering(){
+    override fun startContentShimmering() {
         content_shimmer.startShimmer()
         content_shimmer.show()
         content_recycler.hide()
@@ -98,20 +108,6 @@ class MainActivity : BaseActivity(), MainContract.View {
         presenter.destroyView()
     }
 
-    override fun showTopBarLoading() {
-        progressBar.show()
-    }
-
-    override fun showMainContentViewLoading() {
-    }
-
-    override fun hideTopBarLoading() {
-        progressBar.hide()
-    }
-
-    override fun hideMainContentViewLoading() {
-    }
-
     override fun displayHeroesAvatar(heroList: MutableList<HeroResult>) {
         Timber.d("displayHeroesAvatar: ".plus(heroList.toString()))
         characterList.addAll(heroList)
@@ -123,9 +119,12 @@ class MainActivity : BaseActivity(), MainContract.View {
         Timber.d("displayComicsList: ".plus(comicsList.toString()))
         contentList.addAll(comicsList)
         contentAdapter.notifyDataSetChanged()
+        if (comicsList.size == 0) contentAdapter.stopLoading()
     }
 
     override fun displayErrorMessage(errMsg: String) {
-        toast(errMsg)
+        Snackbar.make(snackbar_tv, errMsg, Snackbar.LENGTH_LONG).show()
+//        toast(errMsg)
     }
+
 }

@@ -40,19 +40,23 @@ class RemoteDataSource @Inject constructor(
                         "".plus(timestamp),
                         ""
                     )
-                ResultData.Success(heroResponse.mData.heroResults)
+                if (heroResponse.code==200){
+                    ResultData.Success(heroResponse.mData.heroResults)
+                }else{
+                    ResultData.Error(heroResponse.status)
+                }
+
             } catch (exception: Exception) {
-                ResultData.Error(exception)
+                ResultData.Error(exception.toString())
             }
         }
         return when (result) {
             is ResultData.Success -> {
                 val response = result.data
-//                withContext(ioDispatcher) { appDao.setListCountries(response) }
                 ResultData.Success(response)
             }
             is ResultData.Error -> {
-                ResultData.Error(RemoteDataNotFoundException())
+                ResultData.Error(RemoteDataNotFoundException().toString())
             }
         }
     }
@@ -76,9 +80,13 @@ class RemoteDataSource @Inject constructor(
                         heroId,
                         ""
                     )
+                if (comicsResponse.code==200){
                 ResultData.Success(comicsResponse.data.results)
+                } else{
+                    ResultData.Error(comicsResponse.status)
+                }
             } catch (exception: Exception) {
-                ResultData.Error(exception)
+                ResultData.Error(exception.toString())
             }
         }
         return when (result) {
@@ -88,7 +96,7 @@ class RemoteDataSource @Inject constructor(
                 ResultData.Success(response)
             }
             is ResultData.Error -> {
-                ResultData.Error(RemoteDataNotFoundException())
+                ResultData.Error(RemoteDataNotFoundException().toString())
             }
         }
     }
