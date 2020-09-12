@@ -4,7 +4,7 @@ import com.mihodihasan.marvelsuperheroes.main.model.Comics
 import com.mihodihasan.marvelsuperheroes.main.model.Hero
 import javax.inject.Inject
 
-class LocalDataSource @Inject constructor(){
+class LocalDataSource @Inject constructor(val appDao: AppDao){
 
     fun getHeroes():MutableList<Hero>{
         return mutableListOf()

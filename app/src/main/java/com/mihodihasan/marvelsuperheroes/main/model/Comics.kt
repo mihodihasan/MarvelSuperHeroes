@@ -9,5 +9,5 @@ data class Comics(
     val copyright: String,
     val attributionText: String,
     val attributionHTML: String,
-    @Json(name = "etag") val eTag: String,
+    @Json(name = "etag") val eTag: String
 )

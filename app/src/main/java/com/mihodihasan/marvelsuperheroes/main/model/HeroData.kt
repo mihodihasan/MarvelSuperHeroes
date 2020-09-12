@@ -7,5 +7,5 @@ data class HeroData (
     val limit:Int,
     val total:Int,
     val count:Int,
-    @Json(name = "results")val heroResults:MutableList<HeroResult>,
+    @Json(name = "results")val heroResults:MutableList<HeroResult>
 )

@@ -10,7 +10,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MainPresenter constructor(private val mUseCaseHandler: UseCaseHandler, private val getHeroList: GetHeroList, private val getComicsList: GetComicsList,): MainContract.Presenter {
+class MainPresenter constructor(private val mUseCaseHandler: UseCaseHandler, private val getHeroList: GetHeroList, private val getComicsList: GetComicsList): MainContract.Presenter {
 
     var mMainView : MainContract.View? = null
 

@@ -11,10 +11,10 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
-        Timber.d("Timber is Running in BaseActivity")
+//        Timber.d("Timber is Running in BaseActivity")
     }
 
-    override fun attachBaseContext(newBase: Context?) {
-        super.attachBaseContext(newBase?.let { ViewPumpContextWrapper.wrap(it) })
-    }
+//    override fun attachBaseContext(newBase: Context?) {
+//        super.attachBaseContext(newBase?.let { ViewPumpContextWrapper.wrap(it) })
+//    }
 }

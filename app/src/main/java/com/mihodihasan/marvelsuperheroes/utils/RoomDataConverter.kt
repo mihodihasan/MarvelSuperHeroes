@@ -8,10 +8,11 @@ import com.mihodihasan.marvelsuperheroes.main.model.ComicsThumbnail
 import com.mihodihasan.marvelsuperheroes.main.model.HeroResult
 import com.mihodihasan.marvelsuperheroes.main.model.HeroThumbnail
 import java.io.Serializable
+import java.lang.reflect.Type
 
 class RoomDataConverter : Serializable {
 
-    /*@TypeConverter
+    @TypeConverter
     fun stringFromObject(heroResult: HeroResult?): String? {
         return Gson().toJson(heroResult)
     }
@@ -20,9 +21,9 @@ class RoomDataConverter : Serializable {
     fun getObjectFromString(jsonString: String?): HeroResult? {
         val listType: Type = object : TypeToken<HeroResult?>() {}.type
         return Gson().fromJson(jsonString, listType)
-    }*/
+    }
 
-    /*@TypeConverter
+    @TypeConverter
     fun stringFromList(heroResultList: List<HeroResult?>?): String? {
         return Gson().toJson(heroResultList)
     }
@@ -31,10 +32,10 @@ class RoomDataConverter : Serializable {
     fun getListFromString(jsonString: String?): List<HeroResult?>? {
         val listType: Type = object : TypeToken<List<HeroResult?>?>() {}.type
         return Gson().fromJson(jsonString, listType)
-    }*/
+    }
 
 
-    /*@TypeConverter
+    @TypeConverter
     fun stringFromComics(comicsResult: ComicsResult?): String? {
         return Gson().toJson(comicsResult)
     }
@@ -43,9 +44,9 @@ class RoomDataConverter : Serializable {
     fun getComicsFromString(jsonString: String?): ComicsResult? {
         val listType: Type = object : TypeToken<ComicsResult?>() {}.type
         return Gson().fromJson(jsonString, listType)
-    }*/
+    }
 
-    /*@TypeConverter
+    @TypeConverter
     fun stringFromComicsResultList(comicsResultList: List<ComicsResult?>?): String? {
         return Gson().toJson(comicsResultList)
     }
@@ -54,10 +55,10 @@ class RoomDataConverter : Serializable {
     fun getComicsResultListFromString(jsonString: String?): List<ComicsResult?>? {
         val listType: Type = object : TypeToken<List<ComicsResult?>?>() {}.type
         return Gson().fromJson(jsonString, listType)
-    }*/
+    }
 
 
-    /*@TypeConverter
+    @TypeConverter
     fun stringFromHeroThumbnail(heroThumbnail: HeroThumbnail?): String? {
         return Gson().toJson(heroThumbnail)
     }
@@ -66,9 +67,9 @@ class RoomDataConverter : Serializable {
     fun getHeroThumbnailFromString(jsonString: String?): HeroThumbnail? {
         val listType: Type = object : TypeToken<HeroThumbnail?>() {}.type
         return Gson().fromJson(jsonString, listType)
-    }*/
+    }
 
-    /*@TypeConverter
+    @TypeConverter
     fun stringFromHeroThumbnailList(comicsResultList: List<HeroThumbnail?>?): String? {
         return Gson().toJson(comicsResultList)
     }
@@ -77,10 +78,10 @@ class RoomDataConverter : Serializable {
     fun getHeroThumbnailListFromString(jsonString: String?): List<HeroThumbnail?>? {
         val listType: Type = object : TypeToken<List<HeroThumbnail?>?>() {}.type
         return Gson().fromJson(jsonString, listType)
-    }*/
+    }
 
 
-    /*@TypeConverter
+    @TypeConverter
     fun stringFromComicsThumbnail(comicsThumbnail: ComicsThumbnail?): String? {
         return Gson().toJson(comicsThumbnail)
     }
@@ -89,9 +90,9 @@ class RoomDataConverter : Serializable {
     fun getComicsThumbnailFromString(jsonString: String?): ComicsThumbnail? {
         val listType: Type = object : TypeToken<ComicsThumbnail?>() {}.type
         return Gson().fromJson(jsonString, listType)
-    }*/
+    }
 
-    /*@TypeConverter
+    @TypeConverter
     fun stringFromComicsThumbnailList(comicsThumbnail: List<ComicsThumbnail?>?): String? {
         return Gson().toJson(comicsThumbnail)
     }
@@ -100,7 +101,7 @@ class RoomDataConverter : Serializable {
     fun getComicsThumbnailListFromString(jsonString: String?): List<ComicsThumbnail?>? {
         val listType: Type = object : TypeToken<List<ComicsThumbnail?>?>() {}.type
         return Gson().fromJson(jsonString, listType)
-    }*/
+    }
 
 
 }
